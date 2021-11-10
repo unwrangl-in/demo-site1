@@ -1,0 +1,35 @@
+{
+    "products":[
+        {
+            "title":"Product 1",
+            "description":"This is the Procuct Number 1. ",
+            "ack":"Photo by <a href='https://unsplash.com/@neonbrand?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>NeONBRAND</a> on <a href='https://unsplash.com/s/photos/phone?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Unsplash</a>",
+            "photo":"static/images/product-1-scaled.jpg"
+        },
+        {
+            "title":"Product 2",
+            "description": "This is the Procuct Number 2",
+            "ack":"Photo by <a href='https://unsplash.com/@brandomakesbranding?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Brando Makes Branding</a> on <a href='https://unsplash.com/s/photos/phone?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Unsplash</a>",
+            "photo":"static/images/product-2-scaled.jpg"
+        },
+        {
+            "title":"Product 3",
+            "description": "This is the Procuct Number 3. ",
+            "photo":"static/images/product-3-scaled.jpg",
+            "ack":"Photo by <a href='https://unsplash.com/@amirhanna?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Amir Hanna</a> on <a href='https://unsplash.com/s/photos/phone?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Unsplash</a>"
+        },
+        {
+            "title":"Product 4",
+            "description": "This is the Procuct Number 4.",
+            "photo":"static/images/product-4-scaled.jpg",
+            "ack":"Photo by <a href='https://unsplash.com/@fabiraw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Fabian Albert</a> on <a href='https://unsplash.com/s/photos/phone?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Unsplash</a>"
+        },
+        {
+            "title":"Product 5",
+            "description": "This is the Product Number 5. With a broken image",
+            "photo":"static/images/product-5-scaled.jpg",
+            "ack":"Thank you for the non existant photo"
+        }
+    ]
+
+}

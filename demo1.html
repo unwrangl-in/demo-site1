@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo for Unwrangl.in - Speed Demo</title>
+    <script src="http://localhost:4001/snippet/v1/initiate.min.js" data-unwr-app-id="unw_app_im1dy-egNaiXJRViTEO5U" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <style>
+        a.nav-link {
+            color: white;
+        }
+
+        div.product-holder {
+            background-color: rgb(250, 250, 250);
+            border: 1px solid black;
+            border-radius: 3px;
+            margin: 10px;
+            padding: 20px;
+        }
+
+        img.product-photo {
+            max-height: 300px;
+            max-width: 300px;
+            border-radius: 10px;
+        }
+
+        .navbar-brand {
+            color: white
+        }
+    </style>
+</head>
+
+<body>
+
+    <header style="background-color:gray;">
+        <nav class="nav navbar ">
+            <div class="container-fluid">
+                <a href="#" class="navbar-brand">We-Need-Unwrangl.in</a>
+                    <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <select id="slctProducts" class="form-select" style="float:right;">
+                            <option value="product">product</option>
+                            <option value="productz">productz</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container-fluid" style="max-width:2000px;">
+
+        <h1>Look At Our Products</h1>
+
+        <div id="contentHolder" class="row">
+            Loading the products....
+        </div>
+
+    </main>
+
+
+    <script>
+            let slctProducts = document.getElementById("slctProducts");
+
+        function createProductHolder(product) {
+            let prodHolder = document.createElement("div");
+            prodHolder.classList.add("col");
+            prodHolder.classList.add("product-holder");
+            prodHolder.classList.add("text-center");
+
+            let titleHolder = document.createElement("h5");
+            titleHolder.innerText = product.title;
+            prodHolder.appendChild(titleHolder);
+
+            let descHolder = document.createElement("div");
+            descHolder.innerText = product.description;
+            prodHolder.appendChild(descHolder);
+
+
+            let imgHolder = document.createElement("img");
+            imgHolder.setAttribute("src", product.photo);
+            imgHolder.classList.add("product-photo");
+            prodHolder.appendChild(imgHolder);
+
+            let ackElem = document.createElement("div");
+            ackElem.innerHTML = product.ack;
+            prodHolder.appendChild(ackElem);
+
+            return prodHolder;
+        }
+
+        function loadComplete() {
+            
+            let holder = document.getElementById("contentHolder");
+            while(holder.childNodes.length>0){
+                holder.removeChild(holder.childNodes[0]);
+            }
+            let path = `static/js/${slctProducts.value}.json`;
+            fetch(path)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("There was an error retrieving the product catalog");
+                    }
+                    return response;
+                })
+                .then(async (response) => {
+                    if (response.ok) {
+                        let products = await response.json();
+                        products = products.products;
+
+                        for (let product of products) {
+                            holder.appendChild(createProductHolder(product))
+                        }
+                    }
+                })
+                .catch((err) => {
+                    console.error("There was an error in fetching");
+                    console.error("Error is " + err);
+                    alert("An error occurred while fetching product details. Error is " + err);
+                });
+        }
+
+        slctProducts.addEventListener("input", loadComplete);
+        window.addEventListener("load", loadComplete);
+        fetch("https://www.google.com/")
+    </script>
+</body>
+
+</html>
