@@ -1,5 +1,6 @@
 .container {
   max-width: 960px;
+  background-image: url("/404-non-existent.png");
 }
 
 /*
