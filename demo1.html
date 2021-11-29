@@ -35,7 +35,6 @@
 </head>
 
 <body>
-
     <header style="background-color:gray;">
         <nav class="nav navbar ">
             <div class="container-fluid">
@@ -51,20 +50,51 @@
             </div>
         </nav>
     </header>
-
     <main class="container-fluid" style="max-width:2000px;">
 
+        <div class="row">
+
+        <section class="mx-auto w-50">
+            <form>
+                <h1 class="heading-1">Contact Us</h1>
+
+                <fieldset>
+                    <label for="">Your Name:</label>
+                    <input class="form-control" type="text" name="" id="">
+                </fieldset>
+
+                
+                <fieldset>
+                    <label for="">Your Email Address:</label>
+                    <input class="form-control" type="email" name="" id="">
+                </fieldset>
+                <fieldset>
+                    <label for="">Your Questions</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </fieldset>
+                <br>
+                <fieldset class="text-end">
+                    <button id="btnSendQuery" class="btn btn-primary" type="submit">Send your query</button>
+                    <button class="btn btn-warning" type="reset">Clear</button>
+                </fieldset>
+            </form>
+        </section>
+    </div>
+    <div class="row">
+        <br>
+    </div>
+    <div class="row">
         <h1>Look At Our Products</h1>
-
-        <div id="contentHolder" class="row">
-            Loading the products....
-        </div>
-
+    </div>
+    
+    <div id="contentHolder" class="row">
+        Loading the products....
+    </div>
     </main>
 
 
     <script>
-            let slctProducts = document.getElementById("slctProducts");
+        let slctProducts = document.getElementById("slctProducts");
 
         function createProductHolder(product) {
             let prodHolder = document.createElement("div");
@@ -94,7 +124,21 @@
         }
 
         function loadComplete() {
-            
+            let btnSendQuery = document.getElementById("btnSendQuery");
+
+            btnSendQuery.addEventListener("click", ()=>{
+                let req = new Request("/contact/us",{method:"post"});
+                fetch(req).catch((reason)=>{
+                    alert("failed");
+                }).then((success)=>{
+                    if(success.ok){
+                    alert("Succeeded");
+                }else{
+                        alert("Errored. Got a status code of " + success.status + ". " + success.statusText);
+                }
+                })
+
+            });
             let holder = document.getElementById("contentHolder");
             while(holder.childNodes.length>0){
                 holder.removeChild(holder.childNodes[0]);
@@ -127,6 +171,9 @@
         slctProducts.addEventListener("input", loadComplete);
         window.addEventListener("load", loadComplete);
         // fetch("https://www.google.com/")
+
+
+        
     </script>
 </body>
 
