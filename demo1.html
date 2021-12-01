@@ -2,13 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo for Unwrangl.in - Speed Demo</title>
-    <script src="http://localhost:4001/snippet/v1/initiate.min.js" data-unwr-app-id="unw_app_wglvfxYDHvflFpoLC7FFQ" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Product example · Bootstrap v5.1</title>
 
-    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <script src="http://localhost:4001/snippet/v1/initiate.min.js" data-unwr-app-id="unw_app_-Y1USK_NRfDPnSWTWmxD6"
+        crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/product/">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/product.css" rel="stylesheet">
+
     <style>
         a.nav-link {
             color: white;
@@ -35,66 +64,46 @@
 </head>
 
 <body>
-    <header style="background-color:gray;">
-        <nav class="nav navbar ">
-            <div class="container-fluid">
-                <a href="/" class="navbar-brand">UnWrangl.in (demo)</a>
-                    <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <select id="slctProducts" class="form-select" style="float:right;">
-                            <option value="product">product</option>
-                            <option value="productz">productz</option>
-                        </select>
-                    </li>
-                </ul>
-            </div>
+
+    <header class="site-header sticky-top py-1">
+        <nav class="container d-flex flex-column flex-md-row justify-content-between">
+            <a class="py-2" href="/" aria-label="Product">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img"
+                    viewBox="0 0 24 24">
+                    <title>Product</title>
+                    <circle cx="12" cy="12" r="10" />
+                    <path
+                        d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
+                </svg>
+            </a>
+            <!-- <a class="py-2 d-none d-md-inline-block" href="failure.html">Tour of all our products</a>
+      <a class="py-2 d-none d-md-inline-block" href="demo1.html">Product Listing</a> -->
+            <a class="py-2 d-none d-md-inline-block" href="failure.html">Online Tour </a>
+            <a class="py-2 d-none d-md-inline-block" href="demo1.html">Listing</a>
+            <a class="py-2 d-none d-md-inline-block" href="contact-us.html">Contact Us</a>
         </nav>
     </header>
+
     <main class="container-fluid" style="max-width:2000px;">
 
+
         <div class="row">
+            <h1>Look At Our Products</h1>
+        </div>
 
-        <section class="mx-auto w-50">
-            <form>
-                <h1 class="heading-1">Contact Us</h1>
-
-                <fieldset>
-                    <label for="">Your Name:</label>
-                    <input class="form-control" type="text" name="" id="">
-                </fieldset>
-
-                
-                <fieldset>
-                    <label for="">Your Email Address:</label>
-                    <input class="form-control" type="email" name="" id="">
-                </fieldset>
-                <fieldset>
-                    <label for="">Your Questions</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </fieldset>
-                <br>
-                <fieldset class="text-end">
-                    <button id="btnSendQuery" class="btn btn-primary" type="submit">Send your query</button>
-                    <button class="btn btn-warning" type="reset">Clear</button>
-                </fieldset>
-            </form>
-        </section>
-    </div>
-    <div class="row">
-        <br>
-    </div>
-    <div class="row">
-        <h1>Look At Our Products</h1>
-    </div>
-    
-    <div id="contentHolder" class="row">
-        Loading the products....
-    </div>
+        <div id="contentHolder" class="row">
+            Loading the products....
+        </div>
+        <div>
+            <div class="text-end">
+                <button id="btnNextPage" class="btn btn-secondary">Next Page</button>
+            </div>
+        </div>
     </main>
 
 
     <script>
-        let slctProducts = document.getElementById("slctProducts");
 
         function createProductHolder(product) {
             let prodHolder = document.createElement("div");
@@ -123,27 +132,13 @@
             return prodHolder;
         }
 
-        function loadComplete() {
-            let btnSendQuery = document.getElementById("btnSendQuery");
 
-            btnSendQuery.addEventListener("click", ()=>{
-                let req = new Request("/contact/us",{method:"post"});
-                fetch(req).catch((reason)=>{
-                    alert("failed");
-                }).then((success)=>{
-                    if(success.ok){
-                    alert("Succeeded");
-                }else{
-                        alert("Errored. Got a status code of " + success.status + ". " + success.statusText);
-                }
-                })
+        function loadProducts(path) {
 
-            });
             let holder = document.getElementById("contentHolder");
-            while(holder.childNodes.length>0){
+            while (holder.childNodes.length > 0) {
                 holder.removeChild(holder.childNodes[0]);
             }
-            let path = `static/js/${slctProducts.value}.json`;
             fetch(path)
                 .then((response) => {
                     if (!response.ok) {
@@ -168,12 +163,23 @@
                 });
         }
 
-        slctProducts.addEventListener("input", loadComplete);
+        function loadComplete() {
+            let btnNextPage = document.getElementById("btnNextPage");
+
+            btnNextPage.addEventListener("click", () => {
+                loadProducts(`static/js/productz.json`);
+            })
+
+
+            loadProducts(`static/js/product.json`);
+
+        }
+
         window.addEventListener("load", loadComplete);
         // fetch("https://www.google.com/")
 
 
-        
+
     </script>
 </body>
 
